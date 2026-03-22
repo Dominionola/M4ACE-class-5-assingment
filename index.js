@@ -33,3 +33,9 @@ console.log(myUser.age);
 console.log(myUser.addHobby("reading"));
 console.log(myUser.hobbies);
 console.log(myUser.getAdress());
+
+
+//Destructuring & Spread Practice - Practice object and array 
+// destructuring with renaming and default values, nested 
+// destructuring, function parameter destructuring, and 
+// spread operator for merging and cloning
