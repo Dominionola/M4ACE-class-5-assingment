@@ -34,8 +34,51 @@ console.log(myUser.addHobby("reading"));
 console.log(myUser.hobbies);
 console.log(myUser.getAdress());
 
-
-//Destructuring & Spread Practice - Practice object and array 
-// destructuring with renaming and default values, nested 
-// destructuring, function parameter destructuring, and 
+//Destructuring & Spread Practice - Practice object and array
+// destructuring with renaming and default values, nested
+// destructuring, function parameter destructuring, and
 // spread operator for merging and cloning
+
+const driver = {
+  name: "Lewis",
+  team: "Ferrari",
+  qualify: true,
+  position: 2,
+  info: {
+    track: "china",
+    laps: 62,
+  },
+  point: (position) => {
+    if (position === 3) {
+      return 15;
+    } else if (position === 2) {
+      return 20;
+    } else if (position === 1) {
+      return 25;
+    } else {
+      return 0;
+    }
+  },
+};
+
+const { name, team, qualify, position, point: pole } = driver;
+console.log(pole());
+const {
+  info: { track, laps },
+} = driver;
+console.log(track);
+
+const announceResult = ({ name, position, info: { track } }) => {
+  console.log(`${name} finished P${position} at ${track}!`);
+};
+announceResult(driver);
+
+// spread
+const obj1 = { name: "Dominion" };
+const obj2 = { surname: "Samuel" };
+
+const merge = { ...obj1, ...obj2 };
+console.log(merge);
+
+const clone = { ...merge };
+console.log(clone);
