@@ -24,17 +24,35 @@ useTokens(700, (error, data) => {
   }
 });
 
-const EventEmitter = require("events");
-// const PizzaTraker = new EventEmitter()
+// const { error } = require("console");
+// const EventEmitter = require("events");
 
-class PizzaTraker extends EventEmitter {
-  execute(order) {
-    if (!order) {
-      return this.emit("error", new Error("APP Alert: place a real order"));
+// class EventEmitter {
+//   constructor() {
+//     this.listeiner = {};
+//     {
+//     }
+//   }
+// }
+// const PizzaTraker = new EventEmitter();
+
+let isOvenWorking = true;
+let bakePizza = (pizzaName, callback) => {
+  setTimeout(() => {
+    if (isOvenWorking === true) {
+      callback(null, `Your ${pizzaName} is perfectly baked`);
+    } else {
+      callback("The oven is on fire", null);
     }
-    this.emit("success", "APP Alert: Thank you for ordering");
-  }
-}
+  }, 2000);
+};
 
+bakePizza("penapplePizza", (error, data) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(data);
+  }
+});
 // Promise Fundamentals - Create promises from scratch, convert callback-based
 // functions to promise-based, and practice promise chaining with error handling
