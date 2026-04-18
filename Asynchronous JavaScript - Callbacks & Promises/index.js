@@ -56,3 +56,42 @@ bakePizza("penapplePizza", (error, data) => {
 });
 // Promise Fundamentals - Create promises from scratch, convert callback-based
 // functions to promise-based, and practice promise chaining with error handling
+
+let models = ["opus 4.6", "sonnet 4.6", "gemini 3.1", "gamma 4"];
+
+let is_pro_account = true;
+tokenBal = 30000;
+costOpus = 10000;
+costSonnet = 8000;
+costGemini = 7500;
+costGemma = 500;
+
+let prompt = (time, work) => {
+  return new Promise((resolve, reject) => {
+    if (is_pro_account) {
+      setTimeout(() => {
+        resolve(work());
+      }, time);
+    } else {
+      reject(console.log("signup for pro"));
+    }
+  });
+};
+
+prompt(1000, () => {
+  tokenBal -= costOpus;
+  console.log(`Used opus 4.6 to plan architecture. Balance: ${tokenBal}`);
+  return tokenBal;
+})
+  .then((balance) => {
+    console.log("pick model for execution");
+    return balance;
+  })
+  .then((balance) => {
+    tokenBal -= costSonnet;
+    console.log(`sonnet was selected. Balance: ${tokenBal}`);
+    return tokenBal;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
