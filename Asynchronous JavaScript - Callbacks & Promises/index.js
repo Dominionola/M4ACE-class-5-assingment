@@ -60,11 +60,11 @@ bakePizza("penapplePizza", (error, data) => {
 let models = ["opus 4.6", "sonnet 4.6", "gemini 3.1", "gamma 4"];
 
 let is_pro_account = true;
-tokenBal = 30000;
-costOpus = 10000;
-costSonnet = 8000;
-costGemini = 7500;
-costGemma = 500;
+let tokenBal = 30000;
+const costOpus = 10000;
+const costSonnet = 8000;
+const costGemini = 7500;
+const costGemma = 500;
 
 let prompt = (time, work) => {
   return new Promise((resolve, reject) => {
@@ -73,7 +73,7 @@ let prompt = (time, work) => {
         resolve(work());
       }, time);
     } else {
-      reject(console.log("signup for pro"));
+      reject("signup for pro");
     }
   });
 };
@@ -85,13 +85,16 @@ prompt(1000, () => {
 })
   .then((balance) => {
     console.log("pick model for execution");
-    return balance;
+    return prompt(2000, () => {
+      tokenBal -= costSonnet;
+      console.log(`sonnet was selected. Balance: ${tokenBal}`);
+      return tokenBal;
+    });
   })
-  .then((balance) => {
-    tokenBal -= costSonnet;
-    console.log(`sonnet was selected. Balance: ${tokenBal}`);
-    return tokenBal;
+  .then((finalBalance) => {
+    console.log(`Session complete  Remaning tokens: ${finalBalance}`);
   })
+
   .catch((err) => {
     console.log(err);
   });
