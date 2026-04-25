@@ -13,7 +13,7 @@ fetch("https://jsonplaceholder.typicode.com/users/1")
     fetchedUserName = users.name;
 
     return fetch(
-      `https://jsonplaceholder.typicode.com/todos?userID=${users.id}`,
+      `https://jsonplaceholder.typicode.com/to2  s?userID=${users.id}`,
     );
   })
 
@@ -27,4 +27,28 @@ fetch("https://jsonplaceholder.typicode.com/users/1")
   .catch((error) => {
     console.error("The process broke", error);
   });
-nn;
+
+const fetchedUserName1 = async () => {
+  try {
+    const fetchedUser = await fetch(
+      "https://jsonplaceholder.typicode.com/users/3",
+    );
+    const user = await fetchedUser.json();
+
+    console.log(`3. ${user.name} (ID: ${user.id})`);
+
+    const todoResponse = await fetch(
+      `https://jsonplaceholder.typicode.com/todos?userID=${user.id}`,
+    );
+    const todos = await todoResponse.json();
+
+    console.log(
+      `4. Success! Found ${todos.length} to-do items for ${fetchedUser}`,
+    );
+    console.log(`First To-Do ${todos[0].title}`);
+  } catch (error) {
+    console.error("async/await error: ", error);
+  }
+};
+
+fetchedUserName1();
